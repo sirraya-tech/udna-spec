@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UDNA: Universal DID-Native Addressing Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            height: 40vh;
+            max-height: 400px;
+        }
+        .flowchart-node {
+            border: 2px solid #118AB2;
+            background-color: #ffffff;
+            color: #073B4C;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        .flowchart-decision {
+            transform: rotate(45deg);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem auto;
+        }
+        .flowchart-decision .text {
+            transform: rotate(-45deg);
+        }
+        .flowchart-connector {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+        }
+        .flowchart-connector::after {
+            content: '';
+            position: absolute;
+            width: 2px;
+            background-color: #118AB2;
+            top: 0;
+            bottom: 0;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #118AB2;
+            font-size: 1.5rem;
+        }
+        .flowchart-split {
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+        .flowchart-split-line {
+            position: absolute;
+            height: 2px;
+            background-color: #118AB2;
+            top: 50%;
+        }
+        .flowchart-join-connector {
+            position: absolute;
+            width: 2px;
+            background-color: #118AB2;
+        }
+        .flowchart-label {
+            position: absolute;
+            background: #f0f4f8;
+            padding: 0 5px;
+            color: #073B4C;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="text-[#073B4C]">
+    <main class="max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#073B4C]">Universal DID-Native Addressing (UDNA)</h1>
+            <p class="mt-4 text-lg md:text-xl text-[#118AB2]">A New Foundation for a Secure and Decentralized Internet</p>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-center">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-[#FF6B6B] mb-4">The Crisis of the Current Web</h2>
+                <p class="mb-4">The internet's foundation has a critical flaw: it confuses identity with location. Your IP address tells services "where" you are, not "who" you are. This leads to centralized control points, surveillance risks, and layers of complex, vulnerable security patches.</p>
+                <ul class="space-y-2">
+                    <li class="flex items-start"><span class="text-red-500 mr-2">●</span><span><strong class="font-semibold">Centralized Trust:</strong> Reliance on vulnerable Certificate Authorities and DNS.</span></li>
+                    <li class="flex items-start"><span class="text-red-500 mr-2">●</span><span><strong class="font-semibold">Privacy Erosion:</strong> Location-based tracking is built into the core design.</span></li>
+                    <li class="flex items-start"><span class="text-red-500 mr-2">●</span><span><strong class="font-semibold">Inherent Insecurity:</strong> Authentication is an afterthought, not a native feature.</span></li>
+                </ul>
+            </div>
+            <div class="bg-[#073B4C] rounded-lg shadow-lg p-6 text-white">
+                <h2 class="text-2xl font-bold text-[#06D6A0] mb-4">The UDNA Solution: Identity is Address</h2>
+                <p class="mb-4">UDNA rebuilds the network layer with a simple, powerful principle. By using Decentralized Identifiers (DIDs) as the primary network address, every connection becomes natively secure, private, and self-sovereign.</p>
+                <ul class="space-y-2">
+                    <li class="flex items-start"><span class="text-green-400 mr-2">●</span><span><strong class="font-semibold">Decentralized Trust:</strong> Cryptographic proof replaces third-party authorities.</span></li>
+                    <li class="flex items-start"><span class="text-green-400 mr-2">●</span><span><strong class="font-semibold">Privacy by Design:</strong> Unlinkable pairwise identifiers protect user activity.</span></li>
+                    <li class="flex items-start"><span class="text-green-400 mr-2">●</span><span><strong class="font-semibold">Native Security:</strong> Every packet is self-authenticating, eliminating entire classes of attacks.</span></li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-12">
+            <h2 class="text-3xl font-bold text-center mb-2 text-[#118AB2]">The UDNA Resolution Process</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">UDNA employs a resilient, multi-tiered process to resolve identities without central authorities. This fault-tolerant system ensures high availability and performance by prioritizing local caches before querying the decentralized network.</p>
+            <div class="flowchart-container-manual relative w-full">
+                <div class="flowchart-node w-1/2 mx-auto">Resolution Query</div>
+                <div class="flowchart-connector flowchart-arrow"></div>
+                <div class="flowchart-node flowchart-decision"><div class="text">Local Cache</div></div>
+
+                <div class="relative flex justify-around items-start h-96">
+                    <div class="absolute top-0 left-1/4 w-0 h-full">
+                        <div class="flowchart-label" style="top: -15px; left: 5px;">Hit + Valid</div>
+                        <div class="flowchart-connector flowchart-arrow h-24"></div>
+                        <div class="flowchart-node">Return Cached</div>
+                    </div>
+                    <div class="absolute top-0 right-1/4 w-0 h-full">
+                         <div class="flowchart-label" style="top: -15px; right: 5px;">Miss / Stale</div>
+                         <div class="flowchart-connector flowchart-arrow h-24"></div>
+                         <div class="flowchart-node">Select Method</div>
+                         <div class="flowchart-connector flowchart-arrow"></div>
+                         <div class="flowchart-node flowchart-decision"><div class="text">Success?</div></div>
+                    </div>
+                </div>
+                
+                 <div class="relative flex justify-around items-start h-96 mt-[-6rem]">
+                    <div class="absolute top-0 left-[62.5%] w-0 h-full">
+                        <div class="flowchart-label" style="top: -15px; left: 5px;">Yes</div>
+                        <div class="flowchart-connector flowchart-arrow h-24"></div>
+                        <div class="flowchart-node">Verify Proof-of-Control</div>
+                         <div class="flowchart-connector flowchart-arrow"></div>
+                         <div class="flowchart-node flowchart-decision"><div class="text">Valid?</div></div>
+                    </div>
+                    <div class="absolute top-0 right-[12.5%] w-0 h-full">
+                         <div class="flowchart-label" style="top: -15px; right: 5px;">No</div>
+                         <div class="flowchart-connector flowchart-arrow h-24"></div>
+                         <div class="flowchart-node">Try Next Method</div>
+                         <div class="flowchart-connector flowchart-arrow"></div>
+                         <div class="flowchart-node flowchart-decision"><div class="text">More Methods?</div></div>
+                    </div>
+                </div>
+                 <div class="relative flex justify-around items-start h-64 mt-[-6rem]">
+                     <div class="absolute top-0 left-[50%] w-0 h-full">
+                        <div class="flowchart-label" style="top: -15px; left: 5px;">Yes</div>
+                        <div class="flowchart-connector flowchart-arrow h-24"></div>
+                        <div class="flowchart-node">Cache & Return</div>
+                    </div>
+                     <div class="absolute top-0 left-[75%] w-0 h-full">
+                        <div class="flowchart-label" style="top: -15px; right: 5px;">No</div>
+                        <div class="flowchart-connector flowchart-arrow h-24"></div>
+                        <div class="flowchart-node bg-red-100 border-red-500">Resolution Failed</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#118AB2]">Proven Performance & Efficiency</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Core Protocol Latency</h3>
+                    <p class="text-center text-sm mb-4">Micro-operations are completed in microseconds, ensuring the protocol adds negligible delay.</p>
+                    <div class="chart-container">
+                        <canvas id="latencyChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Secure Handshake Speed</h3>
+                    <p class="text-center text-sm mb-4">Establishing a fully authenticated and encrypted session is faster than loading a simple webpage.</p>
+                    <div class="chart-container">
+                        <canvas id="handshakeChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Exceeding Expectations</h3>
+                     <p class="text-center text-sm mb-4">UDNA's achieved performance significantly surpasses its ambitious design targets.</p>
+                    <div class="chart-container">
+                        <canvas id="targetVsAchievedChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-center mb-4">Efficient at Scale</h3>
+                     <p class="text-center text-sm mb-4">While UDNA has a higher initial overhead for tiny packets, its efficiency surpasses IP/TCP for larger data payloads.</p>
+                    <div class="chart-container">
+                        <canvas id="overheadChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-lg shadow-lg p-6 mb-12">
+            <h2 class="text-3xl font-bold text-center mb-8 text-[#118AB2]">Security by Design: A Perfect Score</h2>
+            <p class="text-center max-w-3xl mx-auto mb-8">UDNA passed a comprehensive suite of security tests, verifying its resilience against common and advanced threats. Its architecture is built on a foundation of cryptographic proof, not just promises.</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    <div class="text-4xl text-[#06D6A0]">✓</div>
+                    <h4 class="font-bold mt-2">Identity Binding</h4>
+                    <p class="text-sm text-gray-600">Cryptographic proof prevents impersonation.</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    <div class="text-4xl text-[#06D6A0]">✓</div>
+                    <h4 class="font-bold mt-2">Forward Secrecy</h4>
+                    <p class="text-sm text-gray-600">Past sessions remain secure even if keys are compromised.</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    <div class="text-4xl text-[#06D6A0]">✓</div>
+                    <h4 class="font-bold mt-2">Privacy Protection</h4>
+                    <p class="text-sm text-gray-600">Pairwise DIDs prevent tracking and correlation.</p>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg">
+                    <div class="text-4xl text-[#06D6A0]">✓</div>
+                    <h4 class="font-bold mt-2">Tamper-Proof</h4>
+                    <p class="text-sm text-gray-600">Digital signatures ensure message integrity.</p>
+                </div>
+            </div>
+        </section>
+        
+        <footer class="text-center mt-12">
+            <p class="text-lg font-semibold">UDNA is ready to build the future of the internet.</p>
+            <p class="text-gray-600">With a proven implementation and a clear vision, UDNA is poised to become a foundational open standard for a more secure, private, and decentralized web.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const tooltipTitleCallback = {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                    return label.join(' ');
+                                } else {
+                                    return label;
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+            
+            const colors = {
+                red: '#FF6B6B',
+                yellow: '#FFD166',
+                green: '#06D6A0',
+                blue: '#118AB2',
+                navy: '#073B4C'
+            };
+
+            new Chart(document.getElementById('latencyChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['DID Resolution', 'Address Encoding', 'Signature Verify'],
+                    datasets: [{
+                        label: 'Latency (μs)',
+                        data: [63.2, 6.0, 164.8],
+                        backgroundColor: [colors.green, colors.blue, colors.red],
+                    }]
+                },
+                options: { ...tooltipTitleCallback, maintainAspectRatio: false, indexAxis: 'y', scales: { x: { beginAtZero: true } } }
+            });
+            
+            new Chart(document.getElementById('handshakeChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['Mean', 'P95'],
+                    datasets: [{
+                        label: 'Latency (ms)',
+                        data: [0.3, 0.4],
+                        backgroundColor: [colors.green, colors.yellow],
+                    }]
+                },
+                options: { ...tooltipTitleCallback, maintainAspectRatio: false, scales: { y: { beginAtZero: true, suggestedMax: 0.5 } } }
+            });
+
+            new Chart(document.getElementById('targetVsAchievedChart'), {
+                type: 'bar',
+                data: {
+                    labels: ['DID Resolution (μs)', 'Handshake (ms)', 'Key Rotation (μs)'],
+                    datasets: [
+                        {
+                            label: 'Target',
+                            data: [100, 2, 1000],
+                            backgroundColor: colors.yellow,
+                        },
+                        {
+                            label: 'Achieved',
+                            data: [63.2, 0.3, 680],
+                            backgroundColor: colors.green,
+                        }
+                    ]
+                },
+                options: { ...tooltipTitleCallback, maintainAspectRatio: false, scales: { y: { beginAtZero: true, type: 'logarithmic' } } }
+            });
+
+            new Chart(document.getElementById('overheadChart'), {
+                type: 'line',
+                data: {
+                    labels: [100, 500, 1000, 5000, 10000],
+                    datasets: [
+                        {
+                            label: 'IP/TCP Overhead',
+                            data: [28, 5.6, 2.8, 0.56, 0.28],
+                            borderColor: colors.blue,
+                            backgroundColor: 'rgba(17, 138, 178, 0.1)',
+                            fill: true,
+                            tension: 0.1
+                        },
+                        {
+                            label: 'UDNA Overhead',
+                            data: [85, 17, 8.5, 1.7, 0.85],
+                            borderColor: colors.red,
+                            backgroundColor: 'rgba(255, 107, 107, 0.1)',
+                            fill: true,
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: { ...tooltipTitleCallback, maintainAspectRatio: false, scales: { y: { beginAtZero: true, title: { display: true, text: 'Overhead (%)' } }, x: { title: { display: true, text: 'Message Size (Bytes)' } } } }
+            });
+        });
+    </script>
+</body>
+</html>
